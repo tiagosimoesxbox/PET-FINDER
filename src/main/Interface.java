@@ -4,12 +4,10 @@ package main;
 import dados.Dados;
 import java.util.*;
 import java.io.*;
-import modelo.estados.Estado;
 import modelo.*;
 
 public class Interface {
     
-    private Estado estadoAtual;
     private Dados dados;
     private final static String nomeBD = "base_de_dados";
     
