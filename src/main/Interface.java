@@ -2,9 +2,9 @@
 package main;
 
 import dados.Dados;
-import modelo.estados.Estado;
-import java.io.*;
 import java.util.*;
+import java.io.*;
+import modelo.estados.Estado;
 import modelo.*;
 
 public class Interface {
