@@ -15,7 +15,16 @@ public class Animal implements Registo {
     private boolean vacinado;
     private boolean adotado;
     
-    public Animal(final String nome, final String tipoAnimal, final String raca, final int idade, final boolean vacinado, final boolean adotado) {
+    public Animal(final String nome, final String tipoAnimal, final String raca, final int idade, final boolean vacinado, final boolean adotado) throws Exception{
+        if(tipoAnimal.length() < 1 || tipoAnimal.length() > 30)
+            throw new Exception("Tipo de animal inválido. Limite de caracteres entre 1 e 30.");
+        if(nome.length() < 1 || nome.length() > 30)
+            throw new Exception("Nome de animal inválido. Limite de caracteres entre 1 e 30.");
+        if(raca.length() < 1 || raca.length() > 30)
+            throw new Exception("Raca do animal inválida. Limite de caracteres entre 1 e 30.");
+        if(idade < 0 || idade > 20)
+            throw new Exception("Idade inválida. Limite de caracteres entre 1 e 30.");
+        
         id = ANIMAIS_ID++;
         this.nome = nome;
         this.tipoAnimal = tipoAnimal;

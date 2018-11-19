@@ -37,5 +37,15 @@ public class Adotante implements Registo {
     public String getNome() {
         return nome;
     }
+
+    public int getContacto() {
+        return contacto;
+    }
+
+    public String getMorada() {
+        return morada;
+    }
+    
+    
     
 }
