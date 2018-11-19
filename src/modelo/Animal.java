@@ -39,7 +39,7 @@ public class Animal implements Registo {
     }
     
     public String getRaca() {
-        return tipoAnimal;
+        return raca;
     }
     
     public int getIdade() {
