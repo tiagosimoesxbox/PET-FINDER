@@ -12,7 +12,6 @@ public class Interface {
     private final static String nomeBD = "base_de_dados";
     
     public Interface() {
-        estadoAtual = null;
         dados = carregaDados();
     }
     
