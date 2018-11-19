@@ -9,7 +9,7 @@ public class Interface {
     
     public void iniciar() {
         
-        System.out.println("Em desenvolvimento...");
-    
+        System.out.println("------------- PET FINDER -------------");
+        System.out.println("> ");
     }
 }
