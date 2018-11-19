@@ -68,4 +68,11 @@ public class Animal implements Registo {
     public String getNome() {
         return nome;
     }
+    
+    @Override
+    public String toString() {
+        String str = id + "\t" + nome + "\t" + tipoAnimal + "\t"
+                + raca + "\t" + idade + "\t" + vacinado + "\t" + adotado;
+        return str;
+    }
 }
