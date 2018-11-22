@@ -82,13 +82,14 @@ public class DadosIT {
      * Test of adicionaAnimal method, of class Dados.
      */
     @Test
-    public void testAdicionaAnimal() {
+    public void testAdicionaAnimal() throws Exception {
         
         System.out.println("adicionaAnimal");
         
-        Animal a = new Animal("gato", "fru fru", "terrier", 1, false, true);
-        
         Dados instance = new Dados();
+        Animal a = new Animal(instance, "gato", "fru fru", "terrier", 1, false, true);
+        
+
         instance.adicionaAnimal(a);
     }
 
@@ -96,13 +97,13 @@ public class DadosIT {
      * Test of adicionaDoador method, of class Dados.
      */
     @Test
-    public void testAdicionaDoador() {
+    public void testAdicionaDoador() throws Exception {
         
         System.out.println("adicionaDoador");
         
-        Doador d = new Doador("joao", "rua abc", 244111333);
-        
         Dados instance = new Dados();
+        Doador d = new Doador(instance, "joao", "rua abc", 244111333);
+        
         instance.adicionaDoador(d);
     }
 
@@ -110,13 +111,12 @@ public class DadosIT {
      * Test of adicionaAdotante method, of class Dados.
      */
     @Test
-    public void testAdicionaAdotante() {
+    public void testAdicionaAdotante() throws Exception {
         
         System.out.println("adicionaAdotante");
         
-        Adotante a = new Adotante("joao", "rua abc", 244111333);;
-        
         Dados instance = new Dados();
+        Adotante a = new Adotante(instance, "joao", "rua abc", 244111333);;
         instance.adicionaAdotante(a);
     }
 
@@ -124,12 +124,12 @@ public class DadosIT {
      * Test of getAnimalComId method, of class Dados.
      */
     @Test
-    public void testGetAnimalComId() {
+    public void testGetAnimalComId() throws Exception {
         System.out.println("getAnimalComId");
         
         Dados instance = new Dados();
         
-        Animal esperado = new Animal("cao", "bobi", "pastor alemao", 2, true, true);
+        Animal esperado = new Animal(instance, "cao", "bobi", "pastor alemao", 2, true, true);
         instance.adicionaAnimal(esperado);
         
         int id = esperado.getId();
@@ -142,11 +142,11 @@ public class DadosIT {
      * Test of getDoadorComId method, of class Dados.
      */
     @Test
-    public void testGetDoadorComId() {
+    public void testGetDoadorComId() throws Exception {
         System.out.println("getDoadorComId");
         
         Dados instance = new Dados();
-        Doador esperado = new Doador("tiago", "rua qualquer", 233444111);
+        Doador esperado = new Doador(instance, "tiago", "rua qualquer", 233444111);
         int id = esperado.getId();
         
         instance.adicionaDoador(esperado);
@@ -159,11 +159,11 @@ public class DadosIT {
      * Test of getAdotanteComId method, of class Dados.
      */
     @Test
-    public void testGetAdotanteComId() {
+    public void testGetAdotanteComId() throws Exception {
         System.out.println("getAdotanteComId");
         
         Dados instance = new Dados();
-        Adotante esperado = new Adotante("tiago", "rua qualquer", 233444111);
+        Adotante esperado = new Adotante(instance, "tiago", "rua qualquer", 233444111);
         
         int id = esperado.getId();
         instance.adicionaAdotante(esperado);
@@ -176,13 +176,13 @@ public class DadosIT {
      * Test of removerAnimalComId method, of class Dados.
      */
     @Test
-    public void testRemoverAnimalComId() {
+    public void testRemoverAnimalComId() throws Exception {
         System.out.println("removerAnimalComId");
         
         Dados instance = new Dados();
         
         boolean esperado = true;
-        Animal a = new Animal("cao", "bobi", "pastor alemao", 2, true, true);
+        Animal a = new Animal(instance, "cao", "bobi", "pastor alemao", 2, true, true);
         instance.adicionaAnimal(a);
         boolean resultado = instance.removerAnimalComId(a.getId());
         
@@ -193,13 +193,13 @@ public class DadosIT {
      * Test of removerDoadorComId method, of class Dados.
      */
     @Test
-    public void testRemoverDoadorComId() {
+    public void testRemoverDoadorComId() throws Exception {
         System.out.println("removerDoadorComId");
         
         Dados instance = new Dados();
         
         boolean esperado = true;
-        Doador d = new Doador("tiago", "rua", 233400111);
+        Doador d = new Doador(instance, "tiago", "rua", 233400111);
         instance.adicionaDoador(d);
         boolean resultado = instance.removerDoadorComId(d.getId());
         
@@ -210,14 +210,14 @@ public class DadosIT {
      * Test of removerAdotanteComId method, of class Dados.
      */
     @Test
-    public void testRemoverAdotanteComId() {
+    public void testRemoverAdotanteComId() throws Exception {
         System.out.println("removerAdotanteComId");
         
         int id = 1;
         Dados instance = new Dados();
         
         boolean esperado = true;
-        Adotante a = new Adotante("tiago", "rua", 233400111);
+        Adotante a = new Adotante(instance, "tiago", "rua", 233400111);
         instance.adicionaAdotante(a);
         boolean resultado = instance.removerAdotanteComId(a.getId());
         
