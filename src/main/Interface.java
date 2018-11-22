@@ -10,12 +10,18 @@ public class Interface {
     
     private Dados dados;
     private Scanner sc;
-    private final static String nomeBD = "base_de_dados.dat";
+    private final static String NOME_BD = "base_de_dados.dat";
     
+    /*
+    No construtor são carregados os dados
+    */
     public Interface() {
         carregaDados();
     }
     
+    /*
+    metodo que inicia a interface, o menu principal
+    */
     public void iniciar() {
         
         sc = new Scanner(System.in); 
@@ -61,7 +67,10 @@ public class Interface {
         
     }
     
-    public void registarAnimal() {
+    /*
+    metodos de registo do novo animal, doador ou adotante
+    */
+    private void registarAnimal() {
         
         System.out.println("\n\nRegistar novo animal:\n");
         
@@ -91,18 +100,39 @@ public class Interface {
         
         try {
             
-            boolean vacinado_boolean = Boolean.valueOf(vacinado);
-            boolean adotado_boolean = Boolean.valueOf(adotado);
             int idade_int = Integer.valueOf(idade);
-        
+            
+            if (nome.isEmpty())
+                throw new Exception("Campo 'nome' invalido (inserir nome com 1 a 30 caracteres)");
+            if (tipoAnimal.isEmpty())
+                throw new Exception("Campo 'Tipo de Animal' invalido (inserir tipo de animal com 1 a 30 caracteres)");
+            if (raca.isEmpty())
+                throw new Exception("Campo 'raca' invalido (inserir raca com 1 a 30 caracteres)");
+            
+            if (vacinado == null || adotado == null)
+                throw new Exception("Campos vazios");
+            if (!vacinado.equalsIgnoreCase("SIM") && !vacinado.equalsIgnoreCase("NAO"))
+                throw new Exception("Campo 'vacinado' invalido (inserir SIM ou NAO)");
+            if (!adotado.equalsIgnoreCase("SIM") && !adotado.equalsIgnoreCase("NAO"))
+                throw new Exception("Campo 'adotado' invalido (inserir SIM ou NAO)");
+            
+            boolean vacinado_boolean;
+            boolean adotado_boolean;
+            
+            vacinado_boolean = vacinado.equalsIgnoreCase("SIM");
+            adotado_boolean = adotado.equalsIgnoreCase("SIM");
+            
             dados.adicionaAnimal(new Animal(nome, tipoAnimal, raca, idade_int, vacinado_boolean, adotado_boolean));
             System.out.println("[SUCESSO] Animal registado com sucesso!");
         } 
-        catch (NumberFormatException e) {
-            System.out.println("[ERRO] Parâmetros inválidos!");
+        catch (Exception e) {
+            if (e instanceof NumberFormatException)
+                System.out.println("[ERRO] Parâmetros inválidos! (Campo 'idade' inserir valor inteiro de 0 a 20)");
+            else
+                System.out.println("[ERRO] Parâmetros inválidos! (" + e.getMessage() + ")");
         }
     }
-    public void registarDoador() {
+    private void registarDoador() {
         
         System.out.println("Registar novo doador:\n");
         
@@ -119,16 +149,26 @@ public class Interface {
         String contacto = sc.nextLine();
         
         try {
-            int contacto_int = Integer.valueOf(contacto);
         
+            if (nome.isEmpty())
+                throw new Exception("Campo 'nome' invalido (inserir nome com 1 a 30 caracteres)");
+            if (morada.isEmpty())
+                throw new Exception("Campo 'morada' invalido (inserir morada com 1 a 30 caracteres)");
+            if (contacto.isEmpty())
+                throw new Exception("Campo 'contacto' invalido (inserir contacto com 1 a 30 caracteres)");
+            
+            int contacto_int = Integer.valueOf(contacto);
             dados.adicionaDoador(new Doador(nome, morada, contacto_int));
             System.out.println("[SUCESSO] Doador registado com sucesso!");
         } 
-        catch (NumberFormatException e) {
-            System.out.println("[ERRO] Parâmetros inválidos!");
+        catch (Exception e) {
+            if (e instanceof NumberFormatException)
+                System.out.println("[ERRO] Parâmetros inválidos (inserir contacto com 9 digitos)");
+            else
+                System.out.println("[ERRO] Parâmetros inválidos (" + e.getMessage() + ")");
         }
     }
-    public void registarAdotante() {
+    private void registarAdotante() {
         
         System.out.println("Registar novo adotante:\n");
         
@@ -145,22 +185,37 @@ public class Interface {
         String contacto = sc.nextLine();
         
         try {
-            int contacto_int = Integer.valueOf(contacto);
         
+            if (nome.isEmpty())
+                throw new Exception("Campo 'nome' invalido (inserir nome com 1 a 30 caracteres)");
+            if (morada.isEmpty())
+                throw new Exception("Campo 'morada' invalido (inserir morada com 1 a 30 caracteres)");
+            if (contacto.isEmpty())
+                throw new Exception("Campo 'contacto' invalido (inserir contacto com 9 digitos)");
+            
+            int contacto_int = Integer.valueOf(contacto);
+            
             dados.adicionaAdotante(new Adotante(nome, morada, contacto_int));
             System.out.println("[SUCESSO] Adotante registado com sucesso!");
         } 
-        catch (NumberFormatException e) {
-            System.out.println("[ERRO] Parâmetros inválidos!");
+        catch (Exception e) {
+            if (e instanceof NumberFormatException)
+                System.out.println("[ERRO] Parâmetros inválidos (inserir contacto com 9 digitos)");
+            else
+                System.out.println("[ERRO] Parâmetros inválidos (" + e.getMessage() + ")");
         }
         
     }
     
-    public void eliminarRegistoAnimal() {
+     /*
+    metodos de eliminacao de animal, doador ou adotante existentes
+    */
+    private void eliminarRegistoAnimal() {
         
         System.out.println("\n\nAnimais:");
         ArrayList<Animal> animais = dados.getAnimais();
         
+        System.out.println("id\tNome\tAnimal\tRaca\tIdade\tVacinado\tAdotado");
         for (Animal a: animais)
             System.out.println(a);
         
@@ -172,23 +227,27 @@ public class Interface {
             // a opcao é o id
             int opcao = Integer.valueOf(sc.nextLine());
             
-            if (opcao >= 0 && opcao <= 1000)
-                dados.removerAnimalComId(opcao);
+            if (opcao >= 0 && opcao <= 1000) {
+                if (!dados.removerAnimalComId(opcao))
+                    throw new NumberFormatException();
+                System.out.println("[SUCESSO] Registo com id = '" + opcao + "' removido.");
+            }
             else if (opcao == -1)
                 return;
             else
                 throw new NumberFormatException(); // Ids negativos ou superiores a 1000 não são válidos
         } 
         catch(NumberFormatException e) {
-            System.out.println("[ERRO] Parâmetro inválido");
+            System.out.println("[ERRO] Parâmetro inválido (inserir id do registo ou -1 para voltar ao menu principal)");
         }
         
     }
-    public void eliminarRegistoDoador() {
+    private void eliminarRegistoDoador() {
         
         System.out.println("\n\nDoadores:");
         ArrayList<Doador> doadores = dados.getDoadores();
         
+        System.out.println("id\tnome\tmorada\tcontacto");
         for (Doador a: doadores)
             System.out.println(a);
         
@@ -201,22 +260,26 @@ public class Interface {
             // a opcao é o id
             int opcao = Integer.valueOf(sc.nextLine());
             
-            if (opcao >= 0 && opcao <= 1000)
-                dados.removerDoadorComId(opcao);
+            if (opcao >= 0 && opcao <= 1000) {
+                if (!dados.removerDoadorComId(opcao))
+                    throw new NumberFormatException();
+                System.out.println("[SUCESSO] Registo com id = '" + opcao + "' removido.");
+            }
             else if (opcao == -1)
                 return;
             else
                 throw new NumberFormatException(); // Ids negativos ou superiores a 1000 não são válidos
         } 
         catch(NumberFormatException e) {
-            System.out.println("[ERRO] Parâmetro inválido");
+            System.out.println("[ERRO] Parâmetro inválido (inserir id do registo ou -1 para voltar ao menu principal)");
         }
     }
-    public void eliminarRegistoAdotante() {
+    private void eliminarRegistoAdotante() {
         
         System.out.println("\n\nAdotantes:");
         ArrayList<Adotante> adotantes = dados.getAdotantes();
         
+        System.out.println("id\tnome\tmorada\tcontacto");
         for (Adotante a: adotantes)
             System.out.println(a);
         
@@ -229,30 +292,37 @@ public class Interface {
             // a opcao é o id
             int opcao = Integer.valueOf(sc.nextLine());
             
-            if (opcao >= 0 && opcao <= 1000)
-                dados.removerAdotanteComId(opcao);
+            if (opcao >= 0 && opcao <= 1000) {
+                if (!dados.removerAdotanteComId(opcao))
+                    throw new NumberFormatException();
+                System.out.println("[SUCESSO] Registo com id = '" + opcao + "' removido.");
+            }
             else if (opcao == -1)
                 return;
             else
                 throw new NumberFormatException(); // Ids negativos ou superiores a 1000 não são válidos
         } 
         catch(NumberFormatException e) {
-            System.out.println("[ERRO] Parâmetro inválido");
+            System.out.println("[ERRO] Parâmetro inválido (inserir id do registo ou -1 para voltar ao menu principal)");
         }
         
     }
     
-    public void editarRegistoAnimal() {
+    /*
+    metodos de edicao de animal, doador ou adotante existentes
+    */
+    private void editarRegistoAnimal() {
         
         System.out.println("\n\nAnimais:");
         ArrayList<Animal> animais = dados.getAnimais();
         
+        System.out.println("id\tNome\tAnimal\tRaca\tIdade\tVacinado\tAdotado");
         for (Animal a: animais)
             System.out.println(a);
         
         System.out.println("\nInserir id do registo a editar");
         System.out.println("-1) Voltar ao menu principal");
-        System.out.print(">");
+        System.out.print("> ");
         
         int opcao = Integer.valueOf(sc.nextLine());
         
@@ -262,8 +332,13 @@ public class Interface {
             else if (opcao >= 0 && opcao <= 1000) {
                 Animal existente = dados.getAnimalComId(opcao);
 
-                System.out.println("Editar animal:\n");
+                if (existente == null) {
+                    System.out.println("[ERRO] Parâmetros inválidos (animal com id = '" + opcao + "' nao existe)");
+                    return;
+                }
 
+                System.out.println("\nEditar animal:\n");
+                
                 System.out.println("Tipo de animal:");
                 System.out.print("> ");
                 String tipoAnimal = sc.nextLine();
@@ -308,17 +383,18 @@ public class Interface {
             System.out.println("[ERRO] Parâmetros inválidos!");
         }
     }
-    public void editarRegistoDoador() {
+    private void editarRegistoDoador() {
         
         System.out.println("\n\nDoadores:");
         ArrayList<Doador> doadores = dados.getDoadores();
         
+        System.out.println("id\tnome\tmorada\tcontacto");
         for (Doador a: doadores)
             System.out.println(a);
         
-        System.out.println("Inserir id do registo a editar");
-        System.out.println("\n-1) Voltar ao menu principal");
-        System.out.print(">");
+        System.out.println("\nInserir id do registo a editar");
+        System.out.println("-1) Voltar ao menu principal");
+        System.out.print("> ");
         
         int opcao = Integer.valueOf(sc.nextLine());
         
@@ -327,8 +403,12 @@ public class Interface {
                 return;
             else if (opcao >= 0 && opcao <= 1000) {
                 Doador existente = dados.getDoadorComId(opcao);
-
-                System.out.println("Editar doador:\n");
+                if (existente == null) {
+                    System.out.println("[ERRO] Parâmetros inválidos (doador com id = '" + opcao + "' nao existe)");
+                    return;
+                }
+                
+                System.out.println("\nEditar doador:\n");
 
                 System.out.println("Nome:");
                 System.out.print("> ");
@@ -357,17 +437,18 @@ public class Interface {
                 System.out.println("[ERRO] Parâmetros inválidos!");
         }
     }
-    public void editarRegistoAdotante() {
+    private void editarRegistoAdotante() {
         
         System.out.println("\n\nAdotantes:");
         ArrayList<Adotante> adotantes = dados.getAdotantes();
         
+        System.out.println("id\tnome\tmorada\tcontacto");
         for (Adotante a: adotantes)
             System.out.println(a);
                 
-        System.out.println("Inserir id do registo a editar");
-        System.out.println("\n-1) Voltar ao menu principal");
-        System.out.print(">");
+        System.out.println("\nInserir id do registo a editar");
+        System.out.println("-1) Voltar ao menu principal");
+        System.out.print("> ");
         
         int opcao = Integer.valueOf(sc.nextLine());
         
@@ -376,8 +457,12 @@ public class Interface {
                 return;
             else if (opcao >= 0 && opcao <= 1000) {
                 Adotante existente = dados.getAdotanteComId(opcao);
-
-                System.out.println("Editar adotante:\n");
+                if (existente == null) {
+                    System.out.println("[ERRO] Parâmetros inválidos (adotante com id = '" + opcao + "' nao existe)");
+                    return;
+                }
+                
+                System.out.println("\nEditar adotante:\n");
 
                 System.out.println("Nome:");
                 System.out.print("> ");
@@ -410,11 +495,15 @@ public class Interface {
         
     }
     
-    public void listarRegistosAnimais() {
+    /*
+    metodos para listar animais, doadores ou adotantes existentes
+    */
+    private void listarRegistosAnimais() {
         
         System.out.println("\n\nAnimais:");
         ArrayList<Animal> animais = dados.getAnimais();
         
+        System.out.println("id\tNome\tAnimal\tRaca\tIdade\tVacinado\tAdotado");
         for (Animal a: animais)
             System.out.println(a);
         
@@ -450,11 +539,12 @@ public class Interface {
             }
         }
     }
-    public void listarRegistosDoadores() {
+    private void listarRegistosDoadores() {
         
         System.out.println("\n\nDoadores:");
         ArrayList<Doador> doadores = dados.getDoadores();
         
+        System.out.println("id\tnome\tmorada\tcontacto");
         for (Doador a: doadores)
             System.out.println(a);
         
@@ -491,11 +581,12 @@ public class Interface {
         }
         
     }
-    public void listarRegistosAdotantes() {
+    private void listarRegistosAdotantes() {
         
         System.out.println("\n\nAdotantes:");
         ArrayList<Adotante> adotantes = dados.getAdotantes();
         
+        System.out.println("id\tnome\tmorada\tcontacto");
         for (Adotante a: adotantes)
             System.out.println(a);
         
@@ -534,9 +625,9 @@ public class Interface {
     }
     
     /*
-    devolve uma lista com os animais que têm o nome NOME
+    devolve uma lista com os animais que têm o nome 'NOME' (usado na pesquisa filtrada, efetuada pelos metodos 'listarRegistos*')
     */
-    public ArrayList<Animal> getPesquisaFiltradaAnimais(String nome) {
+    private ArrayList<Animal> getPesquisaFiltradaAnimais(String nome) {
        
         ArrayList<Animal> animais = dados.getAnimais();
         ArrayList<Animal> animais_com_nome = new ArrayList<>();
@@ -552,7 +643,7 @@ public class Interface {
         
         return animais_com_nome;
     }
-    public ArrayList<Doador> getPesquisaFiltradaDoadores(String nome) {
+    private ArrayList<Doador> getPesquisaFiltradaDoadores(String nome) {
         
         ArrayList<Doador> doadores = dados.getDoadores();
         ArrayList<Doador> doadores_com_nome = new ArrayList<>();
@@ -570,7 +661,7 @@ public class Interface {
         return doadores_com_nome;
         
     }
-    public ArrayList<Adotante> getPesquisaFiltradaAdotantes(String nome) {
+    private ArrayList<Adotante> getPesquisaFiltradaAdotantes(String nome) {
         
         
         ArrayList<Adotante> adotantes = dados.getAdotantes();
@@ -589,10 +680,13 @@ public class Interface {
         return adotantes_com_nome;
     }
     
-    public void guardaDados() {
+    /*
+    metodos que obtêm os dados ou guardam os dados
+    */
+    private void guardaDados() {
         
         try {
-            ObjectOutputStream fout = new ObjectOutputStream(new FileOutputStream(nomeBD));
+            ObjectOutputStream fout = new ObjectOutputStream(new FileOutputStream(NOME_BD));
             fout.writeUnshared(dados);
             fout.flush();
             fout.close();
@@ -602,7 +696,7 @@ public class Interface {
         }
         
     }
-    public void carregaDados() {
+    private void carregaDados() {
 
         boolean excepcao = false;
         
@@ -610,7 +704,7 @@ public class Interface {
             
             System.out.println("[INFO] A carregar os dados anteriores ...");
             
-            FileInputStream fin = new FileInputStream(nomeBD);
+            FileInputStream fin = new FileInputStream(NOME_BD);
             ObjectInputStream oin = new ObjectInputStream(fin);
             dados = (Dados)oin.readObject();
             
@@ -625,7 +719,7 @@ public class Interface {
         if (excepcao) {
             try {
                 System.out.println("[AVISO] Não existem dados anteriores. Criada nova base de dados ...");
-                FileOutputStream fout = new FileOutputStream(nomeBD);
+                FileOutputStream fout = new FileOutputStream(NOME_BD);
                 dados = new Dados();
                 fout.close();
             }
@@ -636,7 +730,10 @@ public class Interface {
         }
         
     }
-
+    
+    /*
+    metodos de gestão de registos (os sub-menus - consultar o SRS - Requisito funcional FR2)
+    */
     private void gerirAnimais() {
         
         while (true) {

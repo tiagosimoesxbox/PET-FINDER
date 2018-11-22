@@ -10,16 +10,22 @@ import modelo.Doador;
 
 public class Dados implements Serializable {
     
-    private ArrayList<Animal> animais;
-    private ArrayList<Doador> doadores;
-    private ArrayList<Adotante> adotantes;
+    private final ArrayList<Animal> animais;
+    private final ArrayList<Doador> doadores;
+    private final ArrayList<Adotante> adotantes;
     
+    /*
+    inicia os arraylist para guardar os animais, adotantes e doadores
+    */
     public Dados() {
         animais = new ArrayList<>();
         doadores = new ArrayList<>();
         adotantes = new ArrayList<>();
     }
     
+    /*
+    geters
+    */
     public ArrayList<Animal> getAnimais() {
         return animais;
     }
@@ -30,6 +36,9 @@ public class Dados implements Serializable {
         return adotantes;
     }
     
+    /*
+    adiciona o animal, doador ou adotante no respetivo arraylist
+    */
     public void adicionaAnimal(Animal a) {
         animais.add(a);
     }
@@ -40,6 +49,9 @@ public class Dados implements Serializable {
         adotantes.add(a);
     }
     
+    /*
+    devolve o animal, doador ou adotante no consoante o respetivo id (devolve null se o id nao existir)
+    */
     public Animal getAnimalComId(int id) {
         Iterator it = animais.iterator();
         
@@ -74,32 +86,35 @@ public class Dados implements Serializable {
         return null;
     }
     
-    // REEDITAR e REMOVER
-    public void removerAnimalComId(int id) {
+    /*
+    remove o animal, doador ou adotante consoante o id (devolve true se o id existir, caso contrario devolve false)
+    */
+    public boolean removerAnimalComId(int id) {
         for (Animal a: animais) {
             if (a.getId() == id) {
                 animais.remove(a);
-                return;
+                return true;
             }
         }
+        return false;
     }
-
-    public void removerDoadorComId(int id) {
+    public boolean removerDoadorComId(int id) {
         for (Doador a: doadores) {
             if (a.getId() == id) {
                 doadores.remove(a);
-                return;
+                return true;
             }
         }
+        return false;
     }
-
-    public void removerAdotanteComId(int id) {
+    public boolean removerAdotanteComId(int id) {
         for (Adotante a: adotantes) {
             if (a.getId() == id) {
                 adotantes.remove(a);
-                return;
+                return true;
             }
         }
+        return false;
     }
     
     
