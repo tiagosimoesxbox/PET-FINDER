@@ -69,5 +69,9 @@ public class Adotante implements Registo, Serializable{
     }
     
     
-    
+    @Override
+    public String toString() {
+        String str = id + "\t" + nome + "\t" + morada + "\t" + contacto;
+        return str;
+    }
 }

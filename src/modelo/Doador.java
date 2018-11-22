@@ -68,4 +68,10 @@ public class Doador implements Registo, Serializable{
         return nome;
     }
     
+     @Override
+    public String toString() {
+        String str = id + "\t" + nome + "\t" + morada + "\t" + contacto;
+        return str;
+    }
+    
 }
