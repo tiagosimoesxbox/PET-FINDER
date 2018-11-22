@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dados;
 
 import java.util.ArrayList;
@@ -16,10 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author tiago
- */
 public class DadosIT {
     
     
@@ -47,10 +38,13 @@ public class DadosIT {
      */
     @Test
     public void testGetAnimais() {
+        
         System.out.println("getAnimais");
+        
         Dados dados = new Dados();
         ArrayList<Animal> expResult = new ArrayList<>();
         ArrayList<Animal> result = dados.getAnimais();
+        
         assertEquals(expResult, result);
     }
 
@@ -59,10 +53,13 @@ public class DadosIT {
      */
     @Test
     public void testGetDoadores() {
+        
         System.out.println("getDoadores");
+        
         Dados instance = new Dados();
         ArrayList<Doador> expResult = new ArrayList<>();
         ArrayList<Doador> result = instance.getDoadores();
+        
         assertEquals(expResult, result);
     }
 
@@ -71,10 +68,13 @@ public class DadosIT {
      */
     @Test
     public void testGetAdotantes() {
+        
         System.out.println("getAdotantes");
+        
         Dados instance = new Dados();
         ArrayList<Adotante> expResult = new ArrayList<>();
         ArrayList<Adotante> result = instance.getAdotantes();
+        
         assertEquals(expResult, result);
     }
 
@@ -83,12 +83,13 @@ public class DadosIT {
      */
     @Test
     public void testAdicionaAnimal() {
+        
         System.out.println("adicionaAnimal");
-        Animal a = null;
+        
+        Animal a = new Animal("gato", "fru fru", "terrier", 1, false, true);
+        
         Dados instance = new Dados();
         instance.adicionaAnimal(a);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -96,12 +97,13 @@ public class DadosIT {
      */
     @Test
     public void testAdicionaDoador() {
+        
         System.out.println("adicionaDoador");
-        Doador d = null;
+        
+        Doador d = new Doador("joao", "rua abc", 244111333);
+        
         Dados instance = new Dados();
         instance.adicionaDoador(d);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -109,12 +111,13 @@ public class DadosIT {
      */
     @Test
     public void testAdicionaAdotante() {
+        
         System.out.println("adicionaAdotante");
-        Adotante a = null;
+        
+        Adotante a = new Adotante("joao", "rua abc", 244111333);;
+        
         Dados instance = new Dados();
         instance.adicionaAdotante(a);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -125,14 +128,14 @@ public class DadosIT {
         System.out.println("getAnimalComId");
         
         Dados instance = new Dados();
-        int id = 0;
+        
         Animal esperado = new Animal("cao", "bobi", "pastor alemao", 2, true, true);
         instance.adicionaAnimal(esperado);
         
+        int id = esperado.getId();
         Animal resultado = instance.getAnimalComId(id);
+        
         assertEquals(esperado, resultado);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -143,15 +146,13 @@ public class DadosIT {
         System.out.println("getDoadorComId");
         
         Dados instance = new Dados();
-        int id = 1;
-        
         Doador esperado = new Doador("tiago", "rua qualquer", 233444111);
+        int id = esperado.getId();
+        
         instance.adicionaDoador(esperado);
         
         Doador resultado = instance.getDoadorComId(id);
         assertEquals(esperado, resultado);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -162,14 +163,13 @@ public class DadosIT {
         System.out.println("getAdotanteComId");
         
         Dados instance = new Dados();
-        int id = 0;
         Adotante esperado = new Adotante("tiago", "rua qualquer", 233444111);
+        
+        int id = esperado.getId();
         instance.adicionaAdotante(esperado);
         
         Adotante resultado = instance.getAdotanteComId(id);
         assertEquals(esperado, resultado);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -179,12 +179,12 @@ public class DadosIT {
     public void testRemoverAnimalComId() {
         System.out.println("removerAnimalComId");
         
-        int id = 1;
         Dados instance = new Dados();
         
         boolean esperado = true;
-        instance.adicionaAnimal(new Animal("cao", "bobi", "pastor alemao", 2, true, true));
-        boolean resultado = instance.removerAnimalComId(id);
+        Animal a = new Animal("cao", "bobi", "pastor alemao", 2, true, true);
+        instance.adicionaAnimal(a);
+        boolean resultado = instance.removerAnimalComId(a.getId());
         
         assertEquals(esperado, resultado);
     }
@@ -196,12 +196,12 @@ public class DadosIT {
     public void testRemoverDoadorComId() {
         System.out.println("removerDoadorComId");
         
-        int id = 0;
         Dados instance = new Dados();
         
         boolean esperado = true;
-        instance.adicionaDoador(new Doador("tiago", "rua", 233400111));
-        boolean resultado = instance.removerDoadorComId(id);
+        Doador d = new Doador("tiago", "rua", 233400111);
+        instance.adicionaDoador(d);
+        boolean resultado = instance.removerDoadorComId(d.getId());
         
         assertEquals(esperado, resultado);
     }
@@ -217,8 +217,9 @@ public class DadosIT {
         Dados instance = new Dados();
         
         boolean esperado = true;
-        instance.adicionaAdotante(new Adotante("tiago", "rua", 233400111));
-        boolean resultado = instance.removerAdotanteComId(id);
+        Adotante a = new Adotante("tiago", "rua", 233400111);
+        instance.adicionaAdotante(a);
+        boolean resultado = instance.removerAdotanteComId(a.getId());
         
         assertEquals(esperado, resultado);
     }
