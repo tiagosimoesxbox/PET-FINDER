@@ -1,7 +1,9 @@
 
 package modelo;
 
-public class Doador implements Registo {
+import java.io.Serializable;
+
+public class Doador implements Registo, Serializable{
 
     public static int DOADORES_ID = 0;
     

@@ -1,7 +1,9 @@
 
 package modelo;
 
-public class Adotante implements Registo {
+import java.io.Serializable;
+
+public class Adotante implements Registo, Serializable{
 
     public static int ADOTANTES_ID = 0;
     

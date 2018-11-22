@@ -1,7 +1,9 @@
 
 package modelo;
 
-public class Animal implements Registo {
+import java.io.Serializable;
+
+public class Animal implements Registo, Serializable{
     
     public static int ANIMAIS_ID = 0;
     
@@ -81,7 +83,18 @@ public class Animal implements Registo {
     @Override
     public String toString() {
         String str = id + "\t" + nome + "\t" + tipoAnimal + "\t"
-                + raca + "\t" + idade + "\t" + vacinado + "\t" + adotado;
+                + raca + "\t" + idade + "\t";
+        
+        if(vacinado)
+            str += "sim\t";
+        else
+            str += "nao\t";
+        
+        if(adotado)
+            str += "sim\t";
+        else
+            str += "nao\t";
+        
         return str;
     }
 }
