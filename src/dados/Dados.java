@@ -14,6 +14,22 @@ public class Dados implements Serializable {
     private final ArrayList<Doador> doadores;
     private final ArrayList<Adotante> adotantes;
     
+    public int ADOTANTES_ID = 0;
+    public int ANIMAIS_ID = 0;
+    public int DOADORES_ID = 0;
+    
+    
+    public int getIdAdotantesEIncrementa() {
+        return ADOTANTES_ID++;
+    }
+    public int getIdAnimaisEIncrementa() {
+        return ANIMAIS_ID++;
+    }
+    public int getIdDoadoresEIncrementa() {
+        return DOADORES_ID++;
+    }
+   
+    
     /*
     inicia os arraylist para guardar os animais, adotantes e doadores
     */

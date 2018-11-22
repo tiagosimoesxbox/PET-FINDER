@@ -1,11 +1,13 @@
 
 package modelo;
 
+import dados.Dados;
 import java.io.Serializable;
 
 public class Animal implements Registo, Serializable{
     
     public static int ANIMAIS_ID = 0;
+    static final long serialVersionUID = 1L;
     
     private int id;
     private int idade;
@@ -17,7 +19,7 @@ public class Animal implements Registo, Serializable{
     private boolean vacinado;
     private boolean adotado;
     
-    public Animal(final String nome, final String tipoAnimal, final String raca, final int idade, final boolean vacinado, final boolean adotado) throws Exception{
+    public Animal(Dados d, final String nome, final String tipoAnimal, final String raca, final int idade, final boolean vacinado, final boolean adotado) throws Exception{
         if(tipoAnimal.length() < 1 || tipoAnimal.length() > 30)
             throw new Exception("Tipo de animal inválido. Limite de caracteres entre 1 e 30.");
         if(nome.length() < 1 || nome.length() > 30)
@@ -27,7 +29,7 @@ public class Animal implements Registo, Serializable{
         if(idade < 0 || idade > 20)
             throw new Exception("Idade inválida. Limite de caracteres entre 1 e 30.");
         
-        id = ANIMAIS_ID++;
+        id = d.getIdAnimaisEIncrementa();
         this.nome = nome;
         this.tipoAnimal = tipoAnimal;
         this.raca = raca;

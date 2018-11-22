@@ -1,18 +1,20 @@
 
 package modelo;
 
+import dados.Dados;
 import java.io.Serializable;
 
 public class Doador implements Registo, Serializable{
 
     public static int DOADORES_ID = 0;
+    static final long serialVersionUID = 1L;
     
     private int id;
     private String nome;
     private String morada;
     private int contacto;
     
-    public Doador(final String nome, final String morada, final int contacto) throws Exception{
+    public Doador(Dados d, final String nome, final String morada, final int contacto) throws Exception{
         
         if(nome.length() < 1 || nome.length() > 30)
             throw new Exception("Nome inválido. Limite de caracteres entre 1 e 30.");
@@ -21,7 +23,7 @@ public class Doador implements Registo, Serializable{
         if(contaDigitos(contacto) != 9)
             throw new Exception("Numero invalido.");
         
-        id = DOADORES_ID++;
+        id = d.getIdDoadoresEIncrementa();
         this.nome = nome;
         this.morada = morada;
         this.contacto = contacto;

@@ -50,7 +50,7 @@ public class Interface {
                         gerirDoadores();
                         break;
                     case 4:
-                        //guardaDados();
+                        guardaDados();
                         return;
                     default:
                         System.out.println("[ERRO] Parâmetro inválido.");
@@ -122,7 +122,7 @@ public class Interface {
             vacinado_boolean = vacinado.equalsIgnoreCase("SIM");
             adotado_boolean = adotado.equalsIgnoreCase("SIM");
             
-            dados.adicionaAnimal(new Animal(nome, tipoAnimal, raca, idade_int, vacinado_boolean, adotado_boolean));
+            dados.adicionaAnimal(new Animal(dados, nome, tipoAnimal, raca, idade_int, vacinado_boolean, adotado_boolean));
             System.out.println("[SUCESSO] Animal registado com sucesso!");
         } 
         catch (Exception e) {
@@ -158,7 +158,7 @@ public class Interface {
                 throw new Exception("Campo 'contacto' invalido (inserir contacto com 1 a 30 caracteres)");
             
             int contacto_int = Integer.valueOf(contacto);
-            dados.adicionaDoador(new Doador(nome, morada, contacto_int));
+            dados.adicionaDoador(new Doador(dados, nome, morada, contacto_int));
             System.out.println("[SUCESSO] Doador registado com sucesso!");
         } 
         catch (Exception e) {
@@ -195,7 +195,7 @@ public class Interface {
             
             int contacto_int = Integer.valueOf(contacto);
             
-            dados.adicionaAdotante(new Adotante(nome, morada, contacto_int));
+            dados.adicionaAdotante(new Adotante(dados, nome, morada, contacto_int));
             System.out.println("[SUCESSO] Adotante registado com sucesso!");
         } 
         catch (Exception e) {
@@ -690,6 +690,8 @@ public class Interface {
             fout.writeUnshared(dados);
             fout.flush();
             fout.close();
+            
+            System.out.println("[SUCESSO] Base de dados guardada");
         }
         catch (IOException e) {
             System.err.println("[ERRO] Impossivel guardar o ficheiro" + e);
