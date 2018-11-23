@@ -14,11 +14,19 @@ public class Dados implements Serializable {
     private final ArrayList<Doador> doadores;
     private final ArrayList<Adotante> adotantes;
     
+    /*
+    Anteriormente estes ids encontravam-se nas classes Animal, Adotante e Doador
+    (Foi usada esta tecnica, porque as variaveis estáticas não são guardadas em ficheiros)
+    */
     public int ADOTANTES_ID = 0;
     public int ANIMAIS_ID = 0;
     public int DOADORES_ID = 0;
-    
-    
+    /*
+    Estes metodos são, APENAS, chamados no construtor das classes Animal, Adotante e Doador
+    (Foi usada esta tecnica, porque as variaveis estáticas não são guardadas em ficheiros)
+    (As classes Animal, Adotante e Doador, nos seus construtores, chamam estes metodos através de uma referência para esta classe "Dados")
+    (Exemplo: new Animal(Dados, ...) => no construtor => idAnimal = Dados.getIdAnimaisEIncrementa();)
+    */
     public int getIdAdotantesEIncrementa() {
         return ADOTANTES_ID++;
     }
