@@ -18,9 +18,9 @@ public class Dados implements Serializable {
     Anteriormente estes ids encontravam-se nas classes Animal, Adotante e Doador
     (Foi usada esta tecnica, porque as variaveis estáticas não são guardadas em ficheiros)
     */
-    public int ADOTANTES_ID = 0;
-    public int ANIMAIS_ID = 0;
-    public int DOADORES_ID = 0;
+    private int ADOTANTES_ID = 0;
+    private int ANIMAIS_ID = 0;
+    private int DOADORES_ID = 0;
     /*
     Estes metodos são, APENAS, chamados no construtor das classes Animal, Adotante e Doador
     (Foi usada esta tecnica, porque as variaveis estáticas não são guardadas em ficheiros)
