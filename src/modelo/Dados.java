@@ -25,7 +25,7 @@ public class Dados implements Serializable {
     Estes metodos são, APENAS, chamados no construtor das classes Animal, Adotante e Doador
     (Foi usada esta tecnica, porque as variaveis estáticas não são guardadas em ficheiros)
     (As classes Animal, Adotante e Doador, nos seus construtores, chamam estes metodos através de uma referência para esta classe "Dados")
-    (Exemplo: new Animal(Dados, ...) => no construtor => idAnimal = Dados.getIdAnimaisEIncrementa();)
+    (Exemplo: new Animal(Dados, ...) => no construtor => idAnimal = Dados.getIdAnimaisEIncrementa(); É por essa razão que os métodos são protected)
     */
     protected int getIdAdotantesEIncrementa() {
         return ADOTANTES_ID++;
