@@ -62,7 +62,7 @@ public class AdotanteIT {
         System.out.println("getId");
         Adotante instance;
         try {
-            instance = new Adotante("Joao Valerio", "Rua", 913224009);
+            instance = new Adotante(new Dados(), "Joao Valerio", "Rua", 913224009);
             int expResult = instance.getId();
             int result = instance.getId();
             assertEquals(expResult, result);

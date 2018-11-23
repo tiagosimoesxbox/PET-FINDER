@@ -1,5 +1,6 @@
 package dados;
 
+import modelo.Dados;
 import java.util.ArrayList;
 import modelo.Adotante;
 import modelo.Animal;

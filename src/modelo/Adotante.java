@@ -1,7 +1,6 @@
 
 package modelo;
 
-import dados.Dados;
 import java.io.Serializable;
 
 public class Adotante implements Registo, Serializable{

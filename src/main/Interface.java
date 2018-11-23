@@ -1,7 +1,7 @@
 
 package main;
 
-import dados.Dados;
+import modelo.Dados;
 import java.util.*;
 import java.io.*;
 import modelo.*;

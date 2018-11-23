@@ -1,5 +1,5 @@
 
-package dados;
+package modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,13 +27,13 @@ public class Dados implements Serializable {
     (As classes Animal, Adotante e Doador, nos seus construtores, chamam estes metodos através de uma referência para esta classe "Dados")
     (Exemplo: new Animal(Dados, ...) => no construtor => idAnimal = Dados.getIdAnimaisEIncrementa();)
     */
-    public int getIdAdotantesEIncrementa() {
+    protected int getIdAdotantesEIncrementa() {
         return ADOTANTES_ID++;
     }
-    public int getIdAnimaisEIncrementa() {
+    protected int getIdAnimaisEIncrementa() {
         return ANIMAIS_ID++;
     }
-    public int getIdDoadoresEIncrementa() {
+    protected int getIdDoadoresEIncrementa() {
         return DOADORES_ID++;
     }
    
