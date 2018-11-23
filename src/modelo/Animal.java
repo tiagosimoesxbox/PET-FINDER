@@ -26,7 +26,7 @@ public class Animal implements Registo, Serializable{
         if(raca.length() < 1 || raca.length() > 30)
             throw new Exception("Raca do animal inválida. Limite de caracteres entre 1 e 30.");
         if(idade < 0 || idade > 20)
-            throw new Exception("Idade inválida. Limite de caracteres entre 1 e 30.");
+            throw new Exception("Idade inválida. Inserir idade de 0 a 20 anos.");
         
         id = d.getIdAnimaisEIncrementa();
         this.nome = nome;

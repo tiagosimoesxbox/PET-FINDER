@@ -714,7 +714,7 @@ public class Interface {
             fin.close();
             System.out.println("[SUCESSO] Os dados anteriores carregados com sucesso!");
         }
-        catch (IOException | ClassNotFoundException e) {
+        catch (IOException | ClassNotFoundException | ClassCastException e) {
             excepcao = true;
         }
         

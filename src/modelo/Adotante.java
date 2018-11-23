@@ -19,7 +19,7 @@ public class Adotante implements Registo, Serializable{
         if(morada.length() < 1 || morada.length() > 30)
             throw new Exception("Nome de animal inválido. Limite de caracteres entre 1 e 30.");
         if(contaDigitos(contacto) != 9)
-            throw new Exception("Numero invalido.");
+            throw new Exception("Numero invalido telefone invalido (inserir 9 digitos).");
         
         id = d.getIdAdotantesEIncrementa();
         this.nome = nome;
