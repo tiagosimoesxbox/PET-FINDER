@@ -4,9 +4,6 @@ package modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-import modelo.Adotante;
-import modelo.Animal;
-import modelo.Doador;
 
 public class Dados implements Serializable {
     
@@ -18,9 +15,9 @@ public class Dados implements Serializable {
     Anteriormente estes ids encontravam-se nas classes Animal, Adotante e Doador
     (Foi usada esta tecnica, porque as variaveis estáticas não são guardadas em ficheiros)
     */
-    private int ADOTANTES_ID = 0;
-    private int ANIMAIS_ID = 0;
-    private int DOADORES_ID = 0;
+    private int adotantes_id = 0;
+    private int animais_id = 0;
+    private int doadores_id = 0;
     /*
     Estes metodos são, APENAS, chamados no construtor das classes Animal, Adotante e Doador
     (Foi usada esta tecnica, porque as variaveis estáticas não são guardadas em ficheiros)
@@ -28,13 +25,13 @@ public class Dados implements Serializable {
     (Exemplo: new Animal(Dados, ...) => no construtor => idAnimal = Dados.getIdAnimaisEIncrementa(); É por essa razão que os métodos são protected)
     */
     protected int getIdAdotantesEIncrementa() {
-        return ADOTANTES_ID++;
+        return adotantes_id++;
     }
     protected int getIdAnimaisEIncrementa() {
-        return ANIMAIS_ID++;
+        return animais_id++;
     }
     protected int getIdDoadoresEIncrementa() {
-        return DOADORES_ID++;
+        return doadores_id++;
     }
    
     
@@ -78,33 +75,41 @@ public class Dados implements Serializable {
     */
     public Animal getAnimalComId(int id) {
         Iterator it = animais.iterator();
+        Animal a;
         
         while (it.hasNext()) {
-            Animal a = (Animal) it.next();
-            if (a.getId() == id)
+            a = (Animal) it.next();
+            if (a.getId() == id){
                 return a;
+            }
         }
         
         return null;
     }
+    
     public Doador getDoadorComId(int id) {
         Iterator it = doadores.iterator();
+        Doador d;
         
         while (it.hasNext()) {
-            Doador a = (Doador) it.next();
-            if (a.getId() == id)
-                return a;
+            d = (Doador) it.next();
+            if (d.getId() == id){
+                    return d;
+            }
         }
         
         return null;
     }
+    
     public Adotante getAdotanteComId(int id) {
         Iterator it = adotantes.iterator();
+        Adotante a;
         
         while (it.hasNext()) {
-            Adotante a = (Adotante) it.next();
-            if (a.getId() == id)
+            a = (Adotante) it.next();
+            if (a.getId() == id){
                 return a;
+            }
         }
         
         return null;
@@ -122,6 +127,7 @@ public class Dados implements Serializable {
         }
         return false;
     }
+    
     public boolean removerDoadorComId(int id) {
         for (Doador a: doadores) {
             if (a.getId() == id) {
@@ -131,6 +137,7 @@ public class Dados implements Serializable {
         }
         return false;
     }
+    
     public boolean removerAdotanteComId(int id) {
         for (Adotante a: adotantes) {
             if (a.getId() == id) {
