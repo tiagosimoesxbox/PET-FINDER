@@ -119,32 +119,50 @@ public class Dados implements Serializable {
     remove o animal, doador ou adotante consoante o id (devolve true se o id existir, caso contrario devolve false)
     */
     public boolean removerAnimalComId(int id) {
-        for (Animal a: animais) {
+        
+        Iterator it = animais.iterator();
+        Animal a;
+        
+        while (it.hasNext()) {
+            a = (Animal) it.next();
             if (a.getId() == id) {
-                animais.remove(a);
+                it.remove();
                 return true;
             }
         }
+        
         return false;
     }
     
     public boolean removerDoadorComId(int id) {
-        for (Doador a: doadores) {
-            if (a.getId() == id) {
-                doadores.remove(a);
+        
+        Iterator it = doadores.iterator();
+        Doador d;
+        
+        while (it.hasNext()) {
+            d = (Doador) it.next();
+            if (d.getId() == id) {
+                it.remove();
                 return true;
             }
         }
+        
         return false;
     }
     
     public boolean removerAdotanteComId(int id) {
-        for (Adotante a: adotantes) {
+        
+        Iterator it = adotantes.iterator();
+        Adotante a;
+        
+        while (it.hasNext()) {
+            a = (Adotante) it.next();
             if (a.getId() == id) {
-                adotantes.remove(a);
+                it.remove();
                 return true;
             }
         }
+        
         return false;
     }
     
