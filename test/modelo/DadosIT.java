@@ -92,6 +92,7 @@ public class DadosIT {
         
 
         instance.adicionaAnimal(a);
+        assertEquals(instance.getAnimalComId(0), a);
     }
 
     /**
@@ -106,6 +107,7 @@ public class DadosIT {
         Doador d = new Doador(instance, "joao", "rua abc", 244111333);
         
         instance.adicionaDoador(d);
+        assertEquals(instance.getDoadorComId(0), d);
     }
 
     /**
@@ -118,7 +120,9 @@ public class DadosIT {
         
         Dados instance = new Dados();
         Adotante a = new Adotante(instance, "joao", "rua abc", 244111333);;
+        
         instance.adicionaAdotante(a);
+        assertEquals(instance.getAdotanteComId(0), a);
     }
 
     /**
