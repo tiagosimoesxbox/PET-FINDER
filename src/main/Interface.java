@@ -100,14 +100,14 @@ public class Interface {
         
         try {
             
-            int idade_int = Integer.valueOf(idade);
-            
             if (nome.isEmpty())
                 throw new Exception("Campo 'nome' invalido (inserir nome com 1 a 30 caracteres)");
             if (tipoAnimal.isEmpty())
                 throw new Exception("Campo 'Tipo de Animal' invalido (inserir tipo de animal com 1 a 30 caracteres)");
             if (raca.isEmpty())
                 throw new Exception("Campo 'raca' invalido (inserir raca com 1 a 30 caracteres)");
+            
+            int idade_int = Integer.valueOf(idade);
             
             if (vacinado == null || adotado == null)
                 throw new Exception("Campos vazios");
